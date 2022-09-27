@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SquadMovies</string>
+    <string name="movies_main">Movies</string>
+    <string name="titulo_do_filme">Enter movie title</string>
+    <string name="Title_movie">Title movie</string>
+    <string name="movies">Movies</string>
+</resources>
