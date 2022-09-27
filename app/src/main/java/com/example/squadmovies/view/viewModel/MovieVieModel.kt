@@ -28,6 +28,7 @@ class MovieViewModel() : ViewModel() {
                 response: Response<SearchMovieResponse>
             ) {
                 if (response.isSuccessful) {
+
                     if (response.code() != 200) {
                         Log.i("Script", response.body().toString())
                         _erroMessage.postValue(response.body()?.movies.toString())

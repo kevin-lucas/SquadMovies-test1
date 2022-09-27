@@ -12,9 +12,9 @@ class FavoriteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(bindind.root)
-        setupMenu()
+        setupIconBack()
     }
-    private fun setupMenu() {
+    private fun setupIconBack() {
         bindind.toolbarFavorite.setNavigationIcon(R.drawable.ic_back)
         bindind.toolbarFavorite.setNavigationOnClickListener(
             View.OnClickListener {
