@@ -5,8 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FEFEFF"
-    tools:context=".view.view.MainActivity" >
+    android:layout_margin="10dp"
+    android:background="#0A0A0A"
+    tools:context=".view.view.MovieMainActivity" >
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_main"
@@ -37,6 +38,9 @@
         android:ems="10"
         android:hint="@string/titulo_do_filme"
         android:layout_margin="20dp"
+        android:backgroundTint="@color/white"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,11 +48,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_movies"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_margin="50dp"
-        tools:itemCount="4"
+        android:layout_margin="30dp"
+        app:spanCount="2"
+        android:layout_marginTop="52dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_Text"

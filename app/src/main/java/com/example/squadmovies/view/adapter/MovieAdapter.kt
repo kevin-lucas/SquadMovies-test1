@@ -1,6 +1,5 @@
 package com.example.squadmovies.view.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.squadmovies.databinding.ResItemUserBinding
 import com.example.squadmovies.view.model.MovieResponse
+import com.example.squadmovies.view.view.MovieMainActivity
 
-class MovieAdapter(private val context: Context) : ListAdapter<MovieResponse, MovieAdapter.MovieViewHolder>(
+class MovieAdapter(private val clickMovie: MovieMainActivity) : ListAdapter<MovieResponse, MovieAdapter.MovieViewHolder>(
     MovieResponseCallback()
 ) {
 
@@ -28,13 +28,15 @@ class MovieAdapter(private val context: Context) : ListAdapter<MovieResponse, Mo
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.binding.txtTituloMovie.text = item.title
-        holder.binding.txtYearMovie.text = item.year
+        val itemMovie = getItem(position)
+        itemMovie?.let {
+            Glide.with(holder.binding.root.context)
+                .load(itemMovie.poster)
+                .into(holder.binding.moviesPoster)
 
-        Glide.with(holder.binding.root.context)
-            .load(item.poster)
-            .into(holder.binding.moviesPoster)
+            holder.binding.txtTituloMovie.text = itemMovie.title
+            holder.binding.txtMovieYear.text = itemMovie.year
+        }
     }
 }
 

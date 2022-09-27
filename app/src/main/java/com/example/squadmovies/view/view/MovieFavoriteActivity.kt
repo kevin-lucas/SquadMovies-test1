@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.squadmovies.R
 import com.example.squadmovies.databinding.ActivityFavoriteBinding
 
-class FavoriteActivity : AppCompatActivity() {
+class MovieFavoriteActivity : AppCompatActivity() {
     private val bindind by lazy { ActivityFavoriteBinding.inflate(layoutInflater)
     }
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -14,7 +14,7 @@ import com.example.squadmovies.view.adapter.MovieAdapter
 import com.example.squadmovies.view.model.MovieResponse
 import com.example.squadmovies.view.viewModel.MovieViewModel
 
-class MainActivity : AppCompatActivity() {
+class MovieMainActivity : AppCompatActivity() {
     private lateinit var viewModel: MovieViewModel
 
     private lateinit var movieAdapter: MovieAdapter
@@ -34,6 +34,11 @@ class MainActivity : AppCompatActivity() {
         setupObservers()
     }
 
+//    private fun setupDetails() {
+//        val intent = Intent(this,MovieDetailsActivity::class.java)
+//        intent.putExtra()
+//    }
+
     fun setupOnChangeListeners() {
         binding.editText.doOnTextChanged { text, start, before, count ->
             viewModel.getMoviesByTitle(text.toString())
@@ -42,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setupAdapter(list: List<MovieResponse>) {
         this.movieAdapter = MovieAdapter(this)
-        binding.recyclerviewMovies.layoutManager = LinearLayoutManager(this@MainActivity)
+        binding.recyclerviewMovies.layoutManager = LinearLayoutManager(this@MovieMainActivity)
         binding.recyclerviewMovies.setHasFixedSize(true)
         binding.recyclerviewMovies.adapter = movieAdapter
         with(movieAdapter) { submitList(list) }
@@ -69,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         binding.toolbarMain.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.favorite -> {
-                    startActivity(Intent(this@MainActivity, FavoriteActivity::class.java))
+                    startActivity(Intent(this@MovieMainActivity, MovieFavoriteActivity::class.java))
                     true
                 }
                 else -> {

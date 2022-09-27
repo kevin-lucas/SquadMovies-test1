@@ -10,6 +10,15 @@ class MovieResponse(
     val year: String,
 
     @SerializedName("Poster")
-    val poster: String
+    val poster: String,
+
+    @SerializedName("Plot")
+    val plot: String,
+
+    @SerializedName("Language")
+    val language: String,
+
+    @SerializedName("Search")
+    val movies: List<MovieResponse>
 
 )
