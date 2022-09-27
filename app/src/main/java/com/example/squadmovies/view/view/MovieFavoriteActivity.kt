@@ -6,15 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.squadmovies.R
 import com.example.squadmovies.databinding.ActivityFavoriteBinding
 
-class FavoriteActivity : AppCompatActivity() {
+class MovieFavoriteActivity : AppCompatActivity() {
     private val bindind by lazy { ActivityFavoriteBinding.inflate(layoutInflater)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(bindind.root)
-        setupMenu()
+        setupIconBack()
     }
-    private fun setupMenu() {
+    private fun setupIconBack() {
         bindind.toolbarFavorite.setNavigationIcon(R.drawable.ic_back)
         bindind.toolbarFavorite.setNavigationOnClickListener(
             View.OnClickListener {

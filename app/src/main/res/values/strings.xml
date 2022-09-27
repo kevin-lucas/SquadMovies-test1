@@ -4,4 +4,5 @@
     <string name="titulo_do_filme">Enter movie title</string>
     <string name="Title_movie">Title movie</string>
     <string name="movies">Movies</string>
+    <string name="year_movie">year</string>
 </resources>

@@ -22,23 +22,26 @@ class MovieViewModel() : ViewModel() {
     val erroMessage: LiveData<String> get() = _erroMessage
 
     fun getAllMovies() {
-        retrofitService.getListMovies().enqueue(object : retrofit2.Callback<SearchMovieResponse> {
+        retrofitService.getListMovies().enqueue(object : retrofit2.Callback<MovieResponse> {
+
             override fun onResponse(
-                call: Call<SearchMovieResponse>,
-                response: Response<SearchMovieResponse>
+                call: Call<MovieResponse>,
+                response: Response<MovieResponse>
             ) {
-                if (response.isSuccessful) {
-                    if (response.code() != 200) {
-                        Log.i("Script", response.body().toString())
-                        _erroMessage.postValue(response.body()?.movies.toString())
+                if (response.isSuccessful){
+                   if (response.code() != 200 ){
+                       Log.i("Script",response.body().toString())
+                       _erroMessage.postValue(response.body()?.movies.toString())
+
                     }
-                } else {
+                }else{
                     _listMovieMutableLiveData.postValue(response.body()?.movies)
                 }
+
             }
 
-            override fun onFailure(call: Call<SearchMovieResponse>, t: Throwable) {
-                Log.i("Script", t.message.toString())
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                Log.i("Scritp",t.message.toString())
             }
         })
     }
@@ -66,3 +69,5 @@ class MovieViewModel() : ViewModel() {
         }
     }
 }
+
+
