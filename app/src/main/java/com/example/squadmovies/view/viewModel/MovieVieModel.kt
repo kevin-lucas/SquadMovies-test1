@@ -4,9 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+
 import com.example.squadmovies.view.model.MovieResponse
 import com.example.squadmovies.view.model.SearchMovieResponse
 import com.example.squadmovies.view.network.RetrofitService
+
 import retrofit2.Call
 import retrofit2.Response
 
@@ -20,7 +22,7 @@ class MovieViewModel() : ViewModel() {
     val erroMessage: LiveData<String> get() = _erroMessage
 
     fun getAllMovies() {
-        retrofitService.getListMovies(object : retrofit2.Callback<SearchMovieResponse> {
+        retrofitService.getListMovies().enqueue(object : retrofit2.Callback<SearchMovieResponse> {
             override fun onResponse(
                 call: Call<SearchMovieResponse>,
                 response: Response<SearchMovieResponse>
