@@ -3,15 +3,16 @@ package com.example.squadmovies.view.network
 import com.example.squadmovies.view.model.SearchMovieResponse
 import com.example.squadmovies.view.utils.Constants.Companion.BASE_URL
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface IMovieApi {
+interface RetrofitService {
     @GET("?apikey=a487beb6")
-    suspend fun getListMovies(
-        @Query("t") title: String = "aaa"
+    fun getListMovies(
+        @Query("s") title: Callback<SearchMovieResponse>
     ): Call<SearchMovieResponse>
 
     @GET("?apikey=a487beb6")
@@ -21,16 +22,15 @@ interface IMovieApi {
 
     companion object {
 
-        private val retrofit: IMovieApi by lazy {
+        private val retrofit: RetrofitService by lazy {
             val retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-            retrofit.create(IMovieApi::class.java)
+            retrofit.create(RetrofitService::class.java)
         }
-        fun getBaseUrl(): IMovieApi {
+        fun getBaseUrl(): RetrofitService {
             return retrofit
         }
     }
 }
-
