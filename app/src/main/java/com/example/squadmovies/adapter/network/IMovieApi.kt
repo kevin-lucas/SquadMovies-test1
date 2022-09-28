@@ -1,9 +1,9 @@
-package com.example.squadmovies.view.network
+package com.example.squadmovies.adapter.network
 
-import com.example.squadmovies.view.model.MovieResponse
-import com.example.squadmovies.view.model.SearchMovieResponse
-import com.example.squadmovies.view.utils.Constants.Companion.BASE_URL
-import com.example.squadmovies.view.viewModel.MovieDetailsViewModel
+import com.example.squadmovies.adapter.model.MovieDetailsResponse
+import com.example.squadmovies.adapter.model.MovieResponse
+import com.example.squadmovies.adapter.model.SearchMovieResponse
+import com.example.squadmovies.adapter.utils.Constants.Companion.BASE_URL
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,7 +24,7 @@ interface RetrofitService {
     @GET("?apikey=a487beb6")
     fun getListDetailsMovies(
         @Query("t") title: String = "aaa"
-    ): Call<MovieDetailsViewModel>
+    ): Call<MovieDetailsResponse>
 
     companion object {
 

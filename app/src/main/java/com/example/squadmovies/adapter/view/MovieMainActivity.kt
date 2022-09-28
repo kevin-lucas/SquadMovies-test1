@@ -1,4 +1,4 @@
-package com.example.squadmovies.view.view
+package com.example.squadmovies.adapter.view
 
 import Onclik
 import android.content.Intent
@@ -11,11 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.squadmovies.R
 import com.example.squadmovies.databinding.ActivityMainBinding
-import com.example.squadmovies.view.adapter.MovieAdapter
-import com.example.squadmovies.view.model.MovieResponse
-import com.example.squadmovies.view.viewModel.MovieViewModel
+import com.example.squadmovies.adapter.adapter.MovieAdapter
+import com.example.squadmovies.adapter.model.MovieResponse
+import com.example.squadmovies.adapter.viewModel.MovieViewModel
 
-class MovieMainActivity : AppCompatActivity(),Onclik {
+class MovieMainActivity : AppCompatActivity(), Onclik {
     private lateinit var viewModel: MovieViewModel
 
     private lateinit var movieAdapter: MovieAdapter
@@ -47,6 +47,7 @@ class MovieMainActivity : AppCompatActivity(),Onclik {
         binding.recyclerviewMovies.setHasFixedSize(true)
         binding.recyclerviewMovies.adapter = movieAdapter
         with(movieAdapter) { submitList(list) }
+
     }
 
     private fun setupObservers() {
@@ -80,19 +81,29 @@ class MovieMainActivity : AppCompatActivity(),Onclik {
             }
         }
     }
+
     private fun setupButtonBack() {
-            binding.toolbarMain.setNavigationIcon(R.drawable.ic_back)
-            binding.toolbarMain.setNavigationOnClickListener(
-                View.OnClickListener {
-                    onBackPressed()
-                    true
-                }
-            )
-        }
+        binding.toolbarMain.setNavigationIcon(R.drawable.ic_back)
+        binding.toolbarMain.setNavigationOnClickListener(
+            View.OnClickListener {
+                onBackPressed()
+                true
+            }
+        )
+    }
 
     override fun onClickMovie(onclik: MovieResponse) {
-
+       callScreenDetailsMovies()
     }
+
+
+ private fun callScreenDetailsMovies(){
+     val intent = Intent(this,MovieDetailsActivity::class.java)
+     startActivity(intent)
+ }
+
+
 }
+
 
 

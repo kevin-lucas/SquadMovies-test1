@@ -1,5 +1,5 @@
 
-import com.example.squadmovies.view.model.MovieResponse
+import com.example.squadmovies.adapter.model.MovieResponse
 
 interface Onclik {
     fun onClickMovie(onclik: MovieResponse)

@@ -1,4 +1,4 @@
-package com.example.squadmovies.view.model
+package com.example.squadmovies.adapter.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -14,7 +14,9 @@ class MovieDetailsResponse(
     val language: String,
 
     @SerializedName("Search")
-    val movies: List<MovieResponse>
+    val movies: List<MovieResponse>,
 
+    @SerializedName(" ")
+    val imdbID: String
 
 )

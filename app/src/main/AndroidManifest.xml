@@ -16,17 +16,15 @@
         android:theme="@style/Theme.SquadMovies"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
-            android:name=".DetailsViewModel"
+            android:name=".adapter.view.MovieDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".MovieDetailsActivity"
+            android:name=".adapter.view.MovieFavoriteActivity"
             android:exported="false" />
         <activity
-            android:name=".view.view.MovieFavoriteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.view.MovieMainActivity"
+            android:name=".adapter.view.MovieMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

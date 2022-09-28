@@ -1,4 +1,4 @@
-package com.example.squadmovies.view.model
+package com.example.squadmovies.adapter.model
 
 import com.google.gson.annotations.SerializedName
 

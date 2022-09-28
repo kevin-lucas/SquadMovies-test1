@@ -1,4 +1,4 @@
-package com.example.squadmovies.view.adapter
+package com.example.squadmovies.adapter.adapter
 
 import Onclik
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.squadmovies.databinding.ResItemUserBinding
-import com.example.squadmovies.view.model.MovieResponse
+import com.example.squadmovies.adapter.model.MovieResponse
 
 class MovieAdapter(private val onclick: Onclik) :
     ListAdapter<MovieResponse, MovieAdapter.MovieViewHolder>(

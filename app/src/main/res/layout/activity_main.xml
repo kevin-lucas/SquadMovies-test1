@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp"
     android:background="#0A0A0A"
-    tools:context=".view.view.MovieMainActivity" >
+    tools:context=".adapter.view.MovieMainActivity" >
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_main"
