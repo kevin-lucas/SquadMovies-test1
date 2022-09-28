@@ -3,6 +3,7 @@ package com.example.squadmovies.view.network
 import com.example.squadmovies.view.model.MovieResponse
 import com.example.squadmovies.view.model.SearchMovieResponse
 import com.example.squadmovies.view.utils.Constants.Companion.BASE_URL
+import com.example.squadmovies.view.viewModel.MovieDetailsViewModel
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -19,6 +20,11 @@ interface RetrofitService {
     fun searchMovieByName(
         @Query("s") title: String
     ): Call<SearchMovieResponse>
+
+    @GET("?apikey=a487beb6")
+    fun getListDetailsMovies(
+        @Query("t") title: String = "aaa"
+    ): Call<MovieDetailsViewModel>
 
     companion object {
 
