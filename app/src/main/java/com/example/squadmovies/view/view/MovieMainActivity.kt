@@ -1,5 +1,6 @@
 package com.example.squadmovies.view.view
 
+import Onclik
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -14,7 +15,7 @@ import com.example.squadmovies.view.adapter.MovieAdapter
 import com.example.squadmovies.view.model.MovieResponse
 import com.example.squadmovies.view.viewModel.MovieViewModel
 
-class MovieMainActivity : AppCompatActivity() {
+class MovieMainActivity : AppCompatActivity(),Onclik {
     private lateinit var viewModel: MovieViewModel
 
     private lateinit var movieAdapter: MovieAdapter
@@ -33,11 +34,6 @@ class MovieMainActivity : AppCompatActivity() {
         setupOnChangeListeners()
         setupObservers()
     }
-
-//    private fun setupDetails() {
-//        val intent = Intent(this,MovieDetailsActivity::class.java)
-//        intent.putExtra()
-//    }
 
     fun setupOnChangeListeners() {
         binding.editText.doOnTextChanged { text, start, before, count ->
@@ -58,6 +54,7 @@ class MovieMainActivity : AppCompatActivity() {
             if (!moveis.isNullOrEmpty()) {
                 setupAdapter(moveis)
             }
+
         }
 
         viewModel.erroMessage.observe(this) { message ->
@@ -92,6 +89,10 @@ class MovieMainActivity : AppCompatActivity() {
                 }
             )
         }
+
+    override fun onClickMovie(onclik: MovieResponse) {
+
     }
+}
 
 
