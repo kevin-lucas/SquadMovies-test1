@@ -1,13 +1,13 @@
-package com.example.squadmovies.view.viewModel
+package com.example.squadmovies.projeto.viewModel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-import com.example.squadmovies.view.model.MovieResponse
-import com.example.squadmovies.view.model.SearchMovieResponse
-import com.example.squadmovies.view.network.RetrofitService
+import com.example.squadmovies.projeto.model.MovieResponse
+import com.example.squadmovies.projeto.model.SearchMovieResponse
+import com.example.squadmovies.projeto.network.RetrofitService
 
 import retrofit2.Call
 import retrofit2.Response
