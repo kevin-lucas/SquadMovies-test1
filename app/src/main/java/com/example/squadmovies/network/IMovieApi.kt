@@ -1,9 +1,9 @@
-package com.example.squadmovies.adapter.network
+package com.example.squadmovies.projeto.network
 
-import com.example.squadmovies.adapter.model.MovieDetailsResponse
-import com.example.squadmovies.adapter.model.MovieResponse
-import com.example.squadmovies.adapter.model.SearchMovieResponse
-import com.example.squadmovies.adapter.utils.Constants.Companion.BASE_URL
+import com.example.squadmovies.projeto.model.MovieDetailsResponse
+import com.example.squadmovies.projeto.model.MovieResponse
+import com.example.squadmovies.projeto.model.SearchMovieResponse
+import com.example.squadmovies.projeto.utils.Constants.Companion.BASE_URL
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -1,4 +1,4 @@
-package com.example.squadmovies.adapter.utils
+package com.example.squadmovies.projeto.utils
 
 class Constants {
 

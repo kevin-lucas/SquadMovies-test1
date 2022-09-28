@@ -1,13 +1,12 @@
-package com.example.squadmovies.adapter.view
+package com.example.squadmovies.projeto.view
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.squadmovies.R
-import com.example.squadmovies.adapter.adapter.MovieAdapter
-import com.example.squadmovies.adapter.viewModel.MovieViewModel
-import com.example.squadmovies.databinding.ActivityFavoriteBinding.inflate
+import com.example.squadmovies.projeto.adapter.MovieAdapter
+import com.example.squadmovies.projeto.viewModel.MovieViewModel
 import com.example.squadmovies.databinding.ActivityMovieDetailsBinding
 
 class MovieDetailsActivity : AppCompatActivity() {

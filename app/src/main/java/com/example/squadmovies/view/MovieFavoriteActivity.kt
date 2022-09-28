@@ -1,4 +1,4 @@
-package com.example.squadmovies.adapter.view
+package com.example.squadmovies.projeto.view
 
 import android.os.Bundle
 import android.view.View

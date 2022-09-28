@@ -1,4 +1,4 @@
-package com.example.squadmovies.adapter.view
+package com.example.squadmovies.projeto.view
 
 import Onclik
 import android.content.Intent
@@ -11,9 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.squadmovies.R
 import com.example.squadmovies.databinding.ActivityMainBinding
-import com.example.squadmovies.adapter.adapter.MovieAdapter
-import com.example.squadmovies.adapter.model.MovieResponse
-import com.example.squadmovies.adapter.viewModel.MovieViewModel
+import com.example.squadmovies.projeto.adapter.MovieAdapter
+import com.example.squadmovies.projeto.model.MovieResponse
+import com.example.squadmovies.projeto.viewModel.MovieViewModel
 
 class MovieMainActivity : AppCompatActivity(), Onclik {
     private lateinit var viewModel: MovieViewModel
