@@ -1,6 +1,7 @@
 package com.example.squadmovies.projeto.view
 
-import Onclik
+import IClickItemMovieListener
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,11 +14,19 @@ import com.example.squadmovies.R
 import com.example.squadmovies.databinding.ActivityMainBinding
 import com.example.squadmovies.projeto.adapter.MovieAdapter
 import com.example.squadmovies.projeto.model.MovieResponse
+import com.example.squadmovies.projeto.utils.Constants
 import com.example.squadmovies.projeto.viewModel.MovieViewModel
 
-class MovieMainActivity : AppCompatActivity(), Onclik {
-    private lateinit var viewModel: MovieViewModel
+class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
 
+
+    private lateinit var viewModel: MovieViewModel
+    private val sharedPreference by lazy {
+        getSharedPreferences(
+            "Dados_persistidos",
+            Context.MODE_PRIVATE
+        )
+    }
     private lateinit var movieAdapter: MovieAdapter
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
@@ -30,7 +39,7 @@ class MovieMainActivity : AppCompatActivity(), Onclik {
         setupMenu()
         requestApi()
         setupButtonBack()
-        setupAdapter(arrayListOf())
+        initAdapter(arrayListOf())
         setupOnChangeListeners()
         setupObservers()
     }
@@ -41,24 +50,22 @@ class MovieMainActivity : AppCompatActivity(), Onclik {
         }
     }
 
-    fun setupAdapter(list: List<MovieResponse>) {
+    fun initAdapter(list: List<MovieResponse>) {
         this.movieAdapter = MovieAdapter(this)
         binding.recyclerviewMovies.layoutManager = LinearLayoutManager(this@MovieMainActivity)
         binding.recyclerviewMovies.setHasFixedSize(true)
         binding.recyclerviewMovies.adapter = movieAdapter
         with(movieAdapter) { submitList(list) }
-
     }
 
     private fun setupObservers() {
-        viewModel.listMovieLiveData.observe(this) { moveis ->
-            if (!moveis.isNullOrEmpty()) {
-                setupAdapter(moveis)
+        viewModel.listMovieLiveData.observe(this) { movies ->
+            if (!movies.isNullOrEmpty()) {
+                initAdapter(movies)
             }
-
         }
 
-        viewModel.erroMessage.observe(this) { message ->
+        viewModel.errorMessage.observe(this) { message ->
             Toast.makeText(this, message.toString(), Toast.LENGTH_SHORT).show()
         }
     }
@@ -92,18 +99,18 @@ class MovieMainActivity : AppCompatActivity(), Onclik {
         )
     }
 
-    override fun onClickMovie(onclik: MovieResponse) {
-       callScreenDetailsMovies()
+    private fun callScreenDetailsMovies() {
+        val intent = Intent(this, MovieDetailsActivity::class.java)
+        intent.putExtra(Constants.EXTRA_MOVIE_ID, 2)
+        startActivity(intent)
     }
 
-
- private fun callScreenDetailsMovies(){
-     val intent = Intent(this,MovieDetailsActivity::class.java)
-     startActivity(intent)
- }
-
-
+    override fun onItemClikListener(movie: MovieResponse) {
+        callScreenDetailsMovies()
+    }
 }
-
-
-
+//    private fun salvarDados() {
+//        val sharedPreferencesEditor = sharedPreference.edit()
+//            sharedPreferencesEditor.putString(
+//            sharedPreferencesEditor.apply()
+//    }

@@ -13,9 +13,6 @@ class MovieDetailsResponse(
     @SerializedName("Language")
     val language: String,
 
-    @SerializedName("Search")
-    val movies: List<MovieResponse>,
-
     @SerializedName(" ")
     val imdbID: String
 

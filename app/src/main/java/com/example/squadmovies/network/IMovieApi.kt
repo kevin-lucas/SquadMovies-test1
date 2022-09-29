@@ -14,7 +14,7 @@ interface RetrofitService {
     @GET("?apikey=a487beb6")
     fun getListMovies(
         @Query("t") title: String = "aaa"
-    ): Call<MovieResponse>
+    ): Call<SearchMovieResponse>
 
     @GET("?apikey=a487beb6")
     fun searchMovieByName(
@@ -24,7 +24,7 @@ interface RetrofitService {
     @GET("?apikey=a487beb6")
     fun getListDetailsMovies(
         @Query("t") title: String = "aaa"
-    ): Call<MovieDetailsResponse>
+    ): Call<MovieResponse>
 
     companion object {
 
