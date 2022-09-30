@@ -16,7 +16,7 @@ import com.example.squadmovies.projeto.model.MovieResponse
 import com.example.squadmovies.projeto.network.IRetrofitService
 import com.example.squadmovies.projeto.utils.Constants
 import com.example.squadmovies.projeto.viewModel.MovieViewModel
-import com.example.squadmovies.respository.MovieRepository
+import com.example.squadmovies.data.respository.MovieRepository
 import com.example.squadmovies.usecase.MovieUseCase
 
 class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {

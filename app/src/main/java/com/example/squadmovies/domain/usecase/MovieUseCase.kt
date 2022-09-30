@@ -3,7 +3,7 @@ package com.example.squadmovies.usecase
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.squadmovies.projeto.model.MovieResponse
-import com.example.squadmovies.respository.MovieRepository
+import com.example.squadmovies.data.respository.MovieRepository
 import retrofit2.awaitResponse
 
 class MovieUseCase(private val movieRepository: MovieRepository) {
