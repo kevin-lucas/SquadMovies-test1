@@ -7,32 +7,29 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.squadmovies.R
 import com.example.squadmovies.databinding.ActivityMovieDetailsBinding
-import com.example.squadmovies.projeto.adapter.MovieAdapter
 import com.example.squadmovies.projeto.utils.Constants
-import com.example.squadmovies.projeto.viewModel.MovieViewModel
+import com.example.squadmovies.projeto.viewModel.MovieDetailsViewModel
 
 class MovieDetailsActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MovieViewModel
+    private lateinit var viewModel: MovieDetailsViewModel
 
-    private lateinit var movieAdapter: MovieAdapter
     private val binding by lazy {
         ActivityMovieDetailsBinding.inflate(layoutInflater)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MovieDetailsViewModel::class.java)
         setupIconBack()
-        recoverData()
-
-        val id = intent.getIntExtra(Constants.EXTRA_MOVIE_ID, 0)
-
-        Toast.makeText(this, id.toString(), Toast.LENGTH_SHORT).show()
+        //recoverDataDetails(listOf())
     }
-
-    private fun recoverData() {
-    }
+//
+//    private fun recoverDataDetails(id: List<Any>) {
+//        intent.getStringArrayExtra(Constants.EXTRA_MOVIE_ID)
+//        Toast.makeText(this, id.toString(), Toast.LENGTH_SHORT).show()
+//        viewModel.getDetailsMovies(id)
+//    }
 
     private fun setupIconBack() {
         binding.toolbarMovieDetails.setNavigationIcon(R.drawable.ic_back)

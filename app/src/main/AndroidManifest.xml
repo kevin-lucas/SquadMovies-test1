@@ -19,7 +19,7 @@
 
         <activity
             android:name=".projeto.view.MovieDetailsActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".projeto.view.MovieFavoriteActivity"
             android:exported="false" />
@@ -32,6 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

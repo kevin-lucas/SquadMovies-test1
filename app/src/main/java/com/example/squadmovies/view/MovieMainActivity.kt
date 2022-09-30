@@ -7,20 +7,31 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.squadmovies.R
 import com.example.squadmovies.databinding.ActivityMainBinding
 import com.example.squadmovies.projeto.adapter.MovieAdapter
 import com.example.squadmovies.projeto.model.MovieResponse
+import com.example.squadmovies.projeto.network.IRetrofitService
 import com.example.squadmovies.projeto.utils.Constants
 import com.example.squadmovies.projeto.viewModel.MovieViewModel
+import com.example.squadmovies.respository.MovieRepository
+import com.example.squadmovies.usecase.MovieUseCase
 
 class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
 
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this,
+            MovieViewModel.MovieViewModelFactory(
+                MovieUseCase(MovieRepository(IRetrofitService.getBaseUrl()))
+            )
 
-    private lateinit var viewModel: MovieViewModel
+        )
+            .get(MovieViewModel::class.java)
+    }
+
     private val sharedPreference by lazy {
         getSharedPreferences(
             "Dados_persistidos",
@@ -35,21 +46,21 @@ class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
+
         setupMenu()
         requestApi()
         setupButtonBack()
         initAdapter(arrayListOf())
-        setupOnChangeListeners()
         setupObservers()
     }
 
+/*
     fun setupOnChangeListeners() {
         binding.editText.doOnTextChanged { text, start, before, count ->
-            viewModel.getMoviesByTitle(text.toString())
+            viewModel(text.toString())
         }
     }
-
+*/
     fun initAdapter(list: List<MovieResponse>) {
         this.movieAdapter = MovieAdapter(this)
         binding.recyclerviewMovies.layoutManager = LinearLayoutManager(this@MovieMainActivity)
@@ -71,7 +82,7 @@ class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
     }
 
     private fun requestApi() {
-        viewModel.getAllMovies()
+        viewModel.getMovies()
     }
 
     private fun setupMenu() {
@@ -99,14 +110,14 @@ class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
         )
     }
 
-    private fun callScreenDetailsMovies() {
+    private fun callScreenDetailsMovies(movie: MovieResponse) {
         val intent = Intent(this, MovieDetailsActivity::class.java)
-        intent.putExtra(Constants.EXTRA_MOVIE_ID, 2)
+        intent.putExtra(Constants.EXTRA_MOVIE_ID, movie.imdbID)
         startActivity(intent)
     }
 
     override fun onItemClikListener(movie: MovieResponse) {
-        callScreenDetailsMovies()
+        callScreenDetailsMovies(movie)
     }
 }
 //    private fun salvarDados() {
