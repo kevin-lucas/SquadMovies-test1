@@ -1,10 +1,11 @@
 package com.example.squadmovies.domain.entities
 
-import com.example.squadmovies.projeto.model.SearchMovieResponse
+import com.example.squadmovies.projeto.model.MovieResponse
+
 
 
 object MoviesMappers {
-    fun remoteToDomain(MovieList: List<SearchMovieResponse>): List<Movie> {
+    fun fromRemoteToDomain(MovieList: List<MovieResponse>): List<Movie> {
         return MovieList.map { fromRemoteToDomain(it) }
     }
 

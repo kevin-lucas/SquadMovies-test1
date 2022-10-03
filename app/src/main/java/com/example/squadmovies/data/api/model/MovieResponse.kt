@@ -3,7 +3,7 @@ package com.example.squadmovies.projeto.model
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-class Movie(
+class MovieResponse(
     @SerializedName("Title")
     val title: String,
 
