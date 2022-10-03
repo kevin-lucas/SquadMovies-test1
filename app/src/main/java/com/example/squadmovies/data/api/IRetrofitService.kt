@@ -1,9 +1,10 @@
 package com.example.squadmovies.projeto.network
 
+import com.example.squadmovies.projeto.model.Movie
 import com.example.squadmovies.projeto.model.MovieResponse
 import com.example.squadmovies.projeto.model.SearchMovieResponse
 import com.example.squadmovies.projeto.utils.Constants.Companion.BASE_URL
-import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -13,17 +14,17 @@ interface IRetrofitService {
     @GET("?apikey=a487beb6")
     suspend fun getListMovies(
         @Query("t") movies: String = "aaa"
-    ): Call<SearchMovieResponse>
+    ): Response<List<SearchMovieResponse>>
 
     @GET("?apikey=a487beb6")
-    suspend fun searchMovieByTitle(
-        @Query("s") title: String = " "
-    ): Call<SearchMovieResponse>
+    suspend fun getMobieByTitle(
+        @Query("s") title: String
+    ): Response<List<SearchMovieResponse>>
 
     @GET("?apikey=a487beb6")
-    suspend fun getListDetailsMovies(
-        @Query("t") imdbID: String = " "
-    ): Call<MovieResponse>
+    suspend fun getMovie(
+        @Query("i") imdbID: String
+    ): Response<List<Movie>>
 
     companion object {
 

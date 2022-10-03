@@ -1,7 +1,6 @@
-package com.example.squadmovies.projeto.model
+package com.example.squadmovies.domain.entities
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
 class Movie(
     @SerializedName("Title")
@@ -25,4 +24,4 @@ class Movie(
     @SerializedName("Response")
     val response: String? = "True"
 
-) : Serializable
+)

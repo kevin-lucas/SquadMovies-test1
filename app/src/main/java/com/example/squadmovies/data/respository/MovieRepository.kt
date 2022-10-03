@@ -1,21 +1,18 @@
-package com.example.squadmovies.respository
+package com.example.squadmovies.data.respository
 
-import com.example.squadmovies.projeto.model.MovieResponse
-import com.example.squadmovies.projeto.model.SearchMovieResponse
+import com.example.squadmovies.domain.abstracts.IMoviesRepository
+import com.example.squadmovies.domain.entities.Movie
+import com.example.squadmovies.domain.entities.MoviesMappers
 import com.example.squadmovies.projeto.network.IRetrofitService
-import retrofit2.Call
 
-class MovieRepository(private val iRetrofitService: IRetrofitService) {
+class MovieRepository(private val retrofit: IRetrofitService) : IMoviesRepository {
 
-    suspend fun getList(): Call<SearchMovieResponse> {
-        return iRetrofitService.getListMovies()
-    }
-
-    suspend fun getTitle(title: String): Call<SearchMovieResponse> {
-        return iRetrofitService.searchMovieByTitle()
-    }
-
-    suspend fun getListDetails(title: String): Call<MovieResponse> {
-        return iRetrofitService.getListDetailsMovies()
+    override suspend fun getAllMoviesRepository(): List<Movie>? {
+        val result = retrofit.getListMovies()
+        result.body()?.let {
+            return MoviesMappers.remoteToDomain(it)
+        } ?: run {
+            return null
+        }
     }
 }

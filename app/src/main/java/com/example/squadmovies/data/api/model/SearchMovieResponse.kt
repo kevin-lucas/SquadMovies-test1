@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 class SearchMovieResponse(
     @SerializedName("Search")
-    val movies: List<MovieResponse>,
+    val movies: List<Movie>,
 
     @SerializedName("Response")
     val statusResponse: String,

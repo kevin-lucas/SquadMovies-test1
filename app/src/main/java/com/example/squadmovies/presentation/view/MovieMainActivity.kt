@@ -7,17 +7,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.squadmovies.R
+import com.example.squadmovies.data.respository.MovieRepository
 import com.example.squadmovies.databinding.ActivityMainBinding
+import com.example.squadmovies.domain.usecase.MovieUseCase
 import com.example.squadmovies.projeto.adapter.MovieAdapter
 import com.example.squadmovies.projeto.model.MovieResponse
 import com.example.squadmovies.projeto.network.IRetrofitService
 import com.example.squadmovies.projeto.utils.Constants
 import com.example.squadmovies.projeto.viewModel.MovieViewModel
-import com.example.squadmovies.data.respository.MovieRepository
-import com.example.squadmovies.usecase.MovieUseCase
 
 class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
 
@@ -46,22 +47,15 @@ class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         setupMenu()
-        requestApi()
         setupButtonBack()
         initAdapter(arrayListOf())
+        viewModel.getMovies()
         setupObservers()
+        setupOnChangeListeners()
     }
 
-/*
-    fun setupOnChangeListeners() {
-        binding.editText.doOnTextChanged { text, start, before, count ->
-            viewModel(text.toString())
-        }
-    }
-*/
-    fun initAdapter(list: List<MovieResponse>) {
+    private fun initAdapter(list: List<MovieResponse>) {
         this.movieAdapter = MovieAdapter(this)
         binding.recyclerviewMovies.layoutManager = LinearLayoutManager(this@MovieMainActivity)
         binding.recyclerviewMovies.setHasFixedSize(true)
@@ -79,10 +73,14 @@ class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
         viewModel.errorMessage.observe(this) { message ->
             Toast.makeText(this, message.toString(), Toast.LENGTH_SHORT).show()
         }
+        viewModel.listMovieLiveData.observe(this) { movies ->
+        }
     }
 
-    private fun requestApi() {
-        viewModel.getMovies()
+    private fun setupOnChangeListeners() {
+        binding.editText.doOnTextChanged { text, start, before, count ->
+            viewModel.getMovieByTitle(text.toString())
+        }
     }
 
     private fun setupMenu() {
