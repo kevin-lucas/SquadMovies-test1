@@ -1,6 +1,7 @@
 package com.example.squadmovies.projeto.view
 
-import Onclik
+import IClickItemMovieListener
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -10,14 +11,34 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.squadmovies.R
+import com.example.squadmovies.data.respository.MovieRepository
 import com.example.squadmovies.databinding.ActivityMainBinding
+import com.example.squadmovies.domain.usecase.MovieUseCase
 import com.example.squadmovies.projeto.adapter.MovieAdapter
 import com.example.squadmovies.projeto.model.MovieResponse
+import com.example.squadmovies.projeto.network.IRetrofitService
+import com.example.squadmovies.projeto.utils.Constants
 import com.example.squadmovies.projeto.viewModel.MovieViewModel
 
-class MovieMainActivity : AppCompatActivity(), Onclik {
-    private lateinit var viewModel: MovieViewModel
+class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
 
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this,
+            MovieViewModel.MovieViewModelFactory(
+                MovieUseCase(MovieRepository(IRetrofitService.getBaseUrl()))
+            )
+
+        )
+            .get(MovieViewModel::class.java)
+    }
+
+    private val sharedPreference by lazy {
+        getSharedPreferences(
+            "Dados_persistidos",
+            Context.MODE_PRIVATE
+        )
+    }
     private lateinit var movieAdapter: MovieAdapter
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
@@ -26,45 +47,40 @@ class MovieMainActivity : AppCompatActivity(), Onclik {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
         setupMenu()
-        requestApi()
         setupButtonBack()
-        setupAdapter(arrayListOf())
-        setupOnChangeListeners()
+        initAdapter(arrayListOf())
+        viewModel.getMovies()
         setupObservers()
+        setupOnChangeListeners()
     }
 
-    fun setupOnChangeListeners() {
-        binding.editText.doOnTextChanged { text, start, before, count ->
-            viewModel.getMoviesByTitle(text.toString())
-        }
-    }
-
-    fun setupAdapter(list: List<MovieResponse>) {
+    private fun initAdapter(list: List<MovieResponse>) {
         this.movieAdapter = MovieAdapter(this)
         binding.recyclerviewMovies.layoutManager = LinearLayoutManager(this@MovieMainActivity)
         binding.recyclerviewMovies.setHasFixedSize(true)
         binding.recyclerviewMovies.adapter = movieAdapter
         with(movieAdapter) { submitList(list) }
-
     }
 
     private fun setupObservers() {
-        viewModel.listMovieLiveData.observe(this) { moveis ->
-            if (!moveis.isNullOrEmpty()) {
-                setupAdapter(moveis)
+        viewModel.listMovieLiveData.observe(this) { movies ->
+            if (!movies.isNullOrEmpty()) {
+                initAdapter(movies)
             }
-
         }
 
-        viewModel.erroMessage.observe(this) { message ->
+        viewModel.errorMessage.observe(this) { message ->
             Toast.makeText(this, message.toString(), Toast.LENGTH_SHORT).show()
+        }
+        viewModel.listMovieLiveData.observe(this) { movies ->
         }
     }
 
-    private fun requestApi() {
-        viewModel.getAllMovies()
+    private fun setupOnChangeListeners() {
+        binding.editText.doOnTextChanged { text, start, before, count ->
+            viewModel.getMovieByTitle(text.toString())
+        }
     }
 
     private fun setupMenu() {
@@ -92,18 +108,18 @@ class MovieMainActivity : AppCompatActivity(), Onclik {
         )
     }
 
-    override fun onClickMovie(onclik: MovieResponse) {
-       callScreenDetailsMovies()
+    private fun callScreenDetailsMovies(movie: MovieResponse) {
+        val intent = Intent(this, MovieDetailsActivity::class.java)
+        intent.putExtra(Constants.EXTRA_MOVIE_ID, movie.imdbID)
+        startActivity(intent)
     }
 
-
- private fun callScreenDetailsMovies(){
-     val intent = Intent(this,MovieDetailsActivity::class.java)
-     startActivity(intent)
- }
-
-
+    override fun onItemClikListener(movie: MovieResponse) {
+        callScreenDetailsMovies(movie)
+    }
 }
-
-
-
+//    private fun salvarDados() {
+//        val sharedPreferencesEditor = sharedPreference.edit()
+//            sharedPreferencesEditor.putString(
+//            sharedPreferencesEditor.apply()
+//    }

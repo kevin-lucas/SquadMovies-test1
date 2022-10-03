@@ -37,7 +37,7 @@
         android:layout_margin="20dp"
         android:layout_marginTop="32dp"
         android:text="@string/movies_main"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_details" />
@@ -49,7 +49,7 @@
         android:layout_margin="20dp"
         app:barrierMargin="10dp"
         android:text="@string/movies_main"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_movie_plot" />

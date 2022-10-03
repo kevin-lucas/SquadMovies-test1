@@ -1,6 +1,6 @@
 package com.example.squadmovies.projeto.adapter
 
-import Onclik
+import IClickItemMovieListener
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,13 +10,13 @@ import com.bumptech.glide.Glide
 import com.example.squadmovies.databinding.ResItemUserBinding
 import com.example.squadmovies.projeto.model.MovieResponse
 
-class MovieAdapter(private val onclick: Onclik) :
+class MovieAdapter(private val onClick: IClickItemMovieListener) :
     ListAdapter<MovieResponse, MovieAdapter.MovieViewHolder>(
         MovieResponseCallback()
-    ), Onclik {
+    ),IClickItemMovieListener{
 
-    override fun onClickMovie(onclick: MovieResponse) {
-    }
+    //  val onItemClick :((MovieDetailsResponse)->Unit)? = null
+
     inner class MovieViewHolder(val binding: ResItemUserBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -32,15 +32,22 @@ class MovieAdapter(private val onclick: Onclik) :
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val itemMovie = getItem(position)
-        Glide.with(holder.binding.root.context)
-            .load(itemMovie.poster)
-            .into(holder.binding.moviesPoster)
 
-        holder.binding.txtTituloMovie.text = itemMovie.title
-        holder.binding.txtMovieYear.text = itemMovie.year
-        holder.itemView.setOnClickListener {
-            onclick.onClickMovie(itemMovie)
+        itemMovie?.let {
+            Glide.with(holder.binding.root.context)
+                .load(itemMovie.poster)
+                .into(holder.binding.moviesPoster)
+
+            holder.binding.txtTituloMovie.text = itemMovie.title
+            holder.binding.txtMovieYear.text = itemMovie.year
         }
+          holder.itemView.setOnClickListener {
+              onClick.onItemClikListener(itemMovie)
+          }
+    }
+
+    override fun onItemClikListener(movie: MovieResponse) {
+        TODO("Not yet implemented")
     }
 }
 

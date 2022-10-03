@@ -1,8 +1,8 @@
-package com.example.squadmovies.projeto.model
+package com.example.squadmovies.domain.entities
 
 import com.google.gson.annotations.SerializedName
 
-class MovieResponse(
+class Movie(
     @SerializedName("Title")
     val title: String,
 
@@ -18,10 +18,10 @@ class MovieResponse(
     @SerializedName("Language")
     val language: String,
 
-    @SerializedName(" ")
+    @SerializedName("imdbID")
     val imdbID: String,
 
-    @SerializedName("Search")
-    val movies: List<MovieResponse>
+    @SerializedName("Response")
+    val response: String? = "True"
 
 )
