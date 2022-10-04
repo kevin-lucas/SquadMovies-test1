@@ -1,30 +1,30 @@
 package com.example.squadmovies.projeto.network
 
 import com.example.squadmovies.projeto.model.MovieResponse
-import com.example.squadmovies.projeto.model.SearchMovieResponse
-import com.example.squadmovies.projeto.utils.Constants.Companion.API_KEY
+import com.example.squadmovies.projeto.model.SearchBaseMovieResponse
 import com.example.squadmovies.projeto.utils.Constants.Companion.BASE_URL
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface IRetrofitService {
-    @GET(API_KEY)
-    fun searchMovies(
-        @Query("t") movies: String = "aaa"
-    ): Call<SearchMovieResponse>
+    @GET("?apikey=a487beb6")
+    suspend fun getAllMovies(
+        @Query("s") movies: String = "aaa"
+    ): Response<SearchBaseMovieResponse>
 
     @GET("?apikey=a487beb6")
-    suspend fun getMobieByTitle(
+    suspend fun getMovieByTitle(
         @Query("s") title: String
-    ): Call<SearchMovieResponse>
+    ): Response<SearchBaseMovieResponse>
 
     @GET("?apikey=a487beb6")
     suspend fun getMovie(
         @Query("i") imdbID: String
-    ): Call<MovieResponse>
+    ): Response<MovieResponse>
 
     companion object {
 

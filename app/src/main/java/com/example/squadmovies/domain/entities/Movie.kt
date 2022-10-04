@@ -1,9 +1,9 @@
-package com.example.squadmovies.projeto.model
+package com.example.squadmovies.domain.entities
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
-data class MovieResponse(
+data class Movie(
+
     @SerializedName("Title")
     val title: String,
 
@@ -14,7 +14,7 @@ data class MovieResponse(
     val poster: String?,
 
     @SerializedName("Plot")
-    val plot: String,
+    val plot: String?,
 
     @SerializedName("Language")
     val language: String?,
@@ -23,6 +23,6 @@ data class MovieResponse(
     val imdbID: String,
 
     @SerializedName("Response")
-    val response: String? = ""
+    val response: String?
 
-) : Serializable
+)

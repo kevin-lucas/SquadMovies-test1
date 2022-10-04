@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.squadmovies.databinding.ResItemUserBinding
+import com.example.squadmovies.domain.entities.Movie
 import com.example.squadmovies.projeto.model.MovieResponse
 
 class MovieAdapter(private val onClick: IClickItemMovieListener) :
-    ListAdapter<MovieResponse, MovieAdapter.MovieViewHolder>(
+    ListAdapter<Movie, MovieAdapter.MovieViewHolder>(
         MovieResponseCallback()
     ),IClickItemMovieListener{
 
@@ -46,18 +47,17 @@ class MovieAdapter(private val onClick: IClickItemMovieListener) :
           }
     }
 
-
-    override fun onItemClikListener(movie: MovieResponse) {
+    override fun onItemClikListener(movie: Movie) {
         TODO("Not yet implemented")
     }
 }
 
-class MovieResponseCallback : DiffUtil.ItemCallback<MovieResponse>() {
-    override fun areItemsTheSame(oldItem: MovieResponse, newItem: MovieResponse): Boolean {
+class MovieResponseCallback : DiffUtil.ItemCallback<Movie>() {
+    override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
         return oldItem.title == newItem.language
     }
 
-    override fun areContentsTheSame(oldItem: MovieResponse, newItem: MovieResponse): Boolean {
+    override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
         return oldItem.title == newItem.year
     }
 }

@@ -1,12 +1,18 @@
 package com.example.squadmovies.domain.usecase
 
-import com.example.squadmovies.data.respository.MovieRepository
-import com.example.squadmovies.projeto.model.MovieResponse
-import retrofit2.await
+import com.example.squadmovies.domain.abstracts.IMovieAllAbstract
+import com.example.squadmovies.domain.entities.Movie
+import com.example.squadmovies.domain.interactor.IMoviesUseCase
 
-class MovieUseCase(private val movieRepository: MovieRepository) {
+class MovieUseCase(private val iMovieAllAbstract: IMovieAllAbstract) : IMoviesUseCase {
 
-    suspend fun getResultListMovies(): List<MovieResponse>? {
-        return movieRepository.getListMovies().await().movies
+    override suspend fun getAllMoviesRepository(): List<Movie>? {
+        val resultMovies = iMovieAllAbstract.getAllMoviesRepository()
+
+        resultMovies?.let {
+            return resultMovies
+        } ?: run {
+            return null
+        }
     }
 }
