@@ -50,8 +50,8 @@ class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
         setupMenu()
         setupButtonBack()
         initAdapter(arrayListOf())
-        viewModel.getMovies()
         setupObservers()
+        viewModel.getMovies()
         setupOnChangeListeners()
     }
 
@@ -79,7 +79,7 @@ class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
 
     private fun setupOnChangeListeners() {
         binding.editText.doOnTextChanged { text, start, before, count ->
-            viewModel.getMovieByTitle(text.toString())
+            // viewModel.getMovieByTitle(text.toString())
         }
     }
 
@@ -115,7 +115,7 @@ class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
     }
 
     override fun onItemClikListener(movie: MovieResponse) {
-        callScreenDetailsMovies(movie)
+        //  callScreenDetailsMovies(movie)
     }
 }
 //    private fun salvarDados() {
