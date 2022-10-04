@@ -1,14 +1,12 @@
 package com.example.squadmovies.domain.usecase
 
 import com.example.squadmovies.data.respository.MovieRepository
-import com.example.squadmovies.projeto.model.Movie
-
+import com.example.squadmovies.projeto.model.MovieResponse
+import retrofit2.await
 
 class MovieUseCase(private val movieRepository: MovieRepository) {
 
-    suspend fun getAllMovie(): List<Movie>? {
-        return getAllMovies()
+    suspend fun getResultListMovies(): List<MovieResponse>? {
+        return movieRepository.getListMovies().await().movies
     }
-
-    private suspend fun getAllMovies(): List<Movie>? {
-        val result =
+}

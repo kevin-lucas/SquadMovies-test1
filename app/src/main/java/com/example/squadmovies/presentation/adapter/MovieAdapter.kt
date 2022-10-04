@@ -46,6 +46,7 @@ class MovieAdapter(private val onClick: IClickItemMovieListener) :
           }
     }
 
+
     override fun onItemClikListener(movie: MovieResponse) {
         TODO("Not yet implemented")
     }
