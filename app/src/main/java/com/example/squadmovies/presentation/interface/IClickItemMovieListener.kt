@@ -1,7 +1,6 @@
+import com.example.squadmovies.domain.entities.Movie
 
-
-import com.example.squadmovies.projeto.model.MovieResponse
 
 interface IClickItemMovieListener {
-    fun onItemClikListener(movie: MovieResponse)
+    fun onItemClikListener(movie: Movie)
 }

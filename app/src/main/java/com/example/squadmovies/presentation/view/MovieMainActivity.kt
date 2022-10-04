@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.squadmovies.R
 import com.example.squadmovies.data.respository.MovieRepository
 import com.example.squadmovies.databinding.ActivityMainBinding
+import com.example.squadmovies.domain.entities.Movie
 import com.example.squadmovies.domain.usecase.MovieUseCase
 import com.example.squadmovies.projeto.adapter.MovieAdapter
 import com.example.squadmovies.projeto.model.MovieResponse
@@ -55,7 +56,7 @@ class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
         setupOnChangeListeners()
     }
 
-    private fun initAdapter(list: List<MovieResponse>) {
+    private fun initAdapter(list: List<Movie>) {
         this.movieAdapter = MovieAdapter(this)
         binding.recyclerviewMovies.layoutManager = LinearLayoutManager(this@MovieMainActivity)
         binding.recyclerviewMovies.setHasFixedSize(true)
@@ -114,8 +115,8 @@ class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
         startActivity(intent)
     }
 
-    override fun onItemClikListener(movie: MovieResponse) {
-        //  callScreenDetailsMovies(movie)
+    override fun onItemClikListener(movie: Movie) {
+        TODO("Not yet implemented")
     }
 }
 //    private fun salvarDados() {

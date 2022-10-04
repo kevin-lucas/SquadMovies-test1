@@ -2,7 +2,7 @@ package com.example.squadmovies.projeto.model
 
 import com.google.gson.annotations.SerializedName
 
-class SearchMovieResponse(
+data class SearchBaseMovieResponse(
     @SerializedName("Search")
     val movies: List<MovieResponse>,
 
@@ -10,5 +10,5 @@ class SearchMovieResponse(
     val statusResponse: String,
 
     @SerializedName("Error")
-    val errorMessage: String = ""
+    val errorMessage: String
 )
