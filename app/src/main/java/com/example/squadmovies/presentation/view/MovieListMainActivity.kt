@@ -10,8 +10,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.squadmovies.R
-import com.example.squadmovies.data.respository.MovieByTitleRepository
-import com.example.squadmovies.data.respository.MovieRepository
+import com.example.squadmovies.data.respository.AllMoviesRepository
+import com.example.squadmovies.data.respository.ByTitleMovieRepository
 import com.example.squadmovies.databinding.ActivityMainBinding
 import com.example.squadmovies.domain.entities.Movie
 import com.example.squadmovies.domain.usecase.IAllMovieUseCase
@@ -31,8 +31,8 @@ class MovieListMainActivity : AppCompatActivity(), IClickItemMovieListener {
         ViewModelProvider(
             this,
             MovieListViewModel.MovieViewModelFactory(
-                IAllMovieUseCase(MovieRepository(IRetrofitService.getBaseUrl())),
-                MovieByTitleUseCase(MovieByTitleRepository(IRetrofitService.getBaseUrl()))
+                IAllMovieUseCase(AllMoviesRepository(IRetrofitService.getBaseUrl())),
+                MovieByTitleUseCase(ByTitleMovieRepository(IRetrofitService.getBaseUrl()))
             )
 
         )[MovieListViewModel::class.java]
@@ -44,9 +44,8 @@ class MovieListMainActivity : AppCompatActivity(), IClickItemMovieListener {
 
         setupMenu()
         setupButtonBack()
-        initAdapter(arrayListOf())
+        callingReuestApi()
         setupObservers()
-        viewModel.getMovies()
         setupOnChangeListeners()
     }
 
@@ -76,6 +75,9 @@ class MovieListMainActivity : AppCompatActivity(), IClickItemMovieListener {
                 viewModel.getTitle(text.toString())
             }
         }
+    }
+    private fun callingReuestApi() {
+        viewModel.getMovies()
     }
 
     private fun setupMenu() {

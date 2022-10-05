@@ -7,7 +7,8 @@ import com.example.squadmovies.R
 import com.example.squadmovies.databinding.ActivityFavoriteBinding
 
 class MovieFavoriteActivity : AppCompatActivity() {
-    private val bindind by lazy { ActivityFavoriteBinding.inflate(layoutInflater)
+    private val bindind by lazy {
+        ActivityFavoriteBinding.inflate(layoutInflater)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,4 +24,5 @@ class MovieFavoriteActivity : AppCompatActivity() {
             }
         )
     }
+
 }

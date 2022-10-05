@@ -1,6 +1,7 @@
 package com.example.squadmovies.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class SearchBaseMovieResponse(
     @SerializedName("Search")
@@ -11,4 +12,5 @@ data class SearchBaseMovieResponse(
 
     @SerializedName("Error")
     val errorMessage: String
-)
+
+) : Serializable

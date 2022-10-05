@@ -1,52 +1,43 @@
-package com.example.squadmovies.projeto.viewModel
+package com.example.squadmovies.presentation.viewModel
 
 import androidx.lifecycle.*
-import com.example.squadmovies.domain.usecase.IAllMovieUseCase
-import com.example.squadmovies.data.model.MovieResponse
+import com.example.squadmovies.domain.entities.Movie
+import com.example.squadmovies.domain.interactor.IMovieGetIdUseCase
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
-class MovieDetailsViewModel(private val movieUseCase: IAllMovieUseCase) : ViewModel() {
+class MovieDetailsViewModel(
+    private val iMovieGetIdUseCase:
+        IMovieGetIdUseCase
+) : ViewModel() {
 
-    private val _listMovieMutableLiveData = MutableLiveData<List<MovieResponse>?>()
-    val listMovieLiveData: MutableLiveData<List<MovieResponse>?> get() = _listMovieMutableLiveData
+    private val _movieLiveData = MutableLiveData<Movie?>()
+    val movieLiveData: MutableLiveData<Movie?> get() = _movieLiveData
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
 
-    fun getMovie(imdbID: String) {
-        val movies = listOf(
-            MovieResponse(
-                "Everything Everywhere All at Once",
-                "2021",
-                "https://m.media-amazon.com/images/M/MV5BYTdiOTIyZTQtNmQ1OS00NjZlLWIyMTgtYzk5Y2M3ZDVmMDk1XkEyXkFqcGdeQXVyMTAzMDg4NzU0._V1_SX300.jpg",
-                "Plot",
-                "English",
-                "imdbID"
-            ),
-            MovieResponse(
-                "e",
-                "2021",
-                "https://m.media-amazon.com/images/M/MV5BYTdiOTIyZTQtNmQ1OS00NjZlLWIyMTgtYzk5Y2M3ZDVmMDk1XkEyXkFqcGdeQXVyMTAzMDg4NzU0._V1_SX300.jpg",
-                "Plot",
-                "English",
-                "imdbID"
-            ),
-            MovieResponse(
-                "be",
-                "2021",
-                "https://m.media-amazon.com/images/M/MV5BYTdiOTIyZTQtNmQ1OS00NjZlLWIyMTgtYzk5Y2M3ZDVmMDk1XkEyXkFqcGdeQXVyMTAzMDg4NzU0._V1_SX300.jpg",
-                "Plot",
-                "English",
-                "imdbID"
-            )
-        )
-
-        _listMovieMutableLiveData.postValue(movies)
+    fun getResultDetailsMovie(imdbID: String) {
+        try {
+            viewModelScope.launch {
+                _movieLiveData.postValue(iMovieGetIdUseCase.getIdMovie(imdbID))
+            }
+        } catch (http: HttpException) {
+            when {
+                http.code() == 400 -> {
+                    _errorMessage.postValue("There is something wrong with your request")
+                }
+            }
+        }
     }
 
-    class MovieViewModelFactory(private val movieUseCase: IAllMovieUseCase) : ViewModelProvider.Factory {
+    class MovieDetailsViewModelFactory(
+        private val iMovieGetIdUseCase: IMovieGetIdUseCase
+
+    ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return if (modelClass.isAssignableFrom(MovieDetailsViewModel::class.java)) {
-                MovieDetailsViewModel(this.movieUseCase) as T
+                return MovieDetailsViewModel(this.iMovieGetIdUseCase) as T
             } else {
                 throw IllegalAccessException()
             }

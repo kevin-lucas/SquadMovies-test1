@@ -5,7 +5,7 @@ import com.example.squadmovies.domain.entities.Movie
 import com.example.squadmovies.projeto.network.IRetrofitService
 import com.example.squadmovies.test.mappers.CoinsMappers
 
-class MovieByTitleRepository(private val retrofit: IRetrofitService) : IMovieByTitleAbstract {
+class ByTitleMovieRepository(private val retrofit: IRetrofitService) : IMovieByTitleAbstract {
 
     override suspend fun getMovieByTitleRepository(title: String): List<Movie>? {
         val response = retrofit.getMovieByTitle(title)
