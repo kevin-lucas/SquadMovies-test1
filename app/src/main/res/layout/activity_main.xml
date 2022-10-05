@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    android:background="#0A0A0A"
-    tools:context=".projeto.view.MovieMainActivity" >
+    android:background="#395B78"
+    tools:context=".projeto.view.MovieListMainActivity" >
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_main"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edit_Text"
+        android:id="@+id/edit_text"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:ems="10"
@@ -48,7 +48,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_movies"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="30dp"
         android:layout_marginTop="52dp"
@@ -56,7 +56,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_Text"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text"
         tools:listitem="@layout/res_item_user" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

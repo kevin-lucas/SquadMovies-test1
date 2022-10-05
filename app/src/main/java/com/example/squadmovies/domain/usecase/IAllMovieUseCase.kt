@@ -2,9 +2,10 @@ package com.example.squadmovies.domain.usecase
 
 import com.example.squadmovies.domain.abstracts.IMovieAllAbstract
 import com.example.squadmovies.domain.entities.Movie
-import com.example.squadmovies.domain.interactor.IMoviesUseCase
+import com.example.squadmovies.domain.interactor.IAllMovieUseCase
 
-class MovieUseCase(private val iMovieAllAbstract: IMovieAllAbstract) : IMoviesUseCase {
+class IAllMovieUseCase(private val iMovieAllAbstract: IMovieAllAbstract) :
+    IAllMovieUseCase {
 
     override suspend fun getAllMoviesRepository(): List<Movie>? {
         val resultMovies = iMovieAllAbstract.getAllMoviesRepository()

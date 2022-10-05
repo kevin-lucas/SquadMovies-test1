@@ -5,4 +5,5 @@
     <string name="Title_movie">Title movie</string>
     <string name="movies">Movies</string>
     <string name="year_movie">year</string>
+    <string name="details_movies">Details Movies</string>
 </resources>

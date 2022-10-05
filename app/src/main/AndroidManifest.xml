@@ -24,7 +24,7 @@
             android:name=".projeto.view.MovieFavoriteActivity"
             android:exported="false" />
         <activity
-            android:name=".projeto.view.MovieMainActivity"
+            android:name=".projeto.view.MovieListMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

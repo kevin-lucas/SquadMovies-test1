@@ -1,10 +1,10 @@
 package com.example.squadmovies.projeto.viewModel
 
 import androidx.lifecycle.*
-import com.example.squadmovies.domain.usecase.MovieUseCase
-import com.example.squadmovies.projeto.model.MovieResponse
+import com.example.squadmovies.domain.usecase.IAllMovieUseCase
+import com.example.squadmovies.data.model.MovieResponse
 
-class MovieDetailsViewModel(private val movieUseCase: MovieUseCase) : ViewModel() {
+class MovieDetailsViewModel(private val movieUseCase: IAllMovieUseCase) : ViewModel() {
 
     private val _listMovieMutableLiveData = MutableLiveData<List<MovieResponse>?>()
     val listMovieLiveData: MutableLiveData<List<MovieResponse>?> get() = _listMovieMutableLiveData
@@ -43,7 +43,7 @@ class MovieDetailsViewModel(private val movieUseCase: MovieUseCase) : ViewModel(
         _listMovieMutableLiveData.postValue(movies)
     }
 
-    class MovieViewModelFactory(private val movieUseCase: MovieUseCase) : ViewModelProvider.Factory {
+    class MovieViewModelFactory(private val movieUseCase: IAllMovieUseCase) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return if (modelClass.isAssignableFrom(MovieDetailsViewModel::class.java)) {
                 MovieDetailsViewModel(this.movieUseCase) as T
