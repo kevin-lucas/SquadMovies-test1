@@ -1,7 +1,6 @@
 package com.example.squadmovies.projeto.view
 
 import IClickItemMovieListener
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -11,43 +10,38 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.squadmovies.R
+import com.example.squadmovies.data.respository.MovieByTitleRepository
 import com.example.squadmovies.data.respository.MovieRepository
 import com.example.squadmovies.databinding.ActivityMainBinding
 import com.example.squadmovies.domain.entities.Movie
-import com.example.squadmovies.domain.usecase.MovieUseCase
+import com.example.squadmovies.domain.usecase.IAllMovieUseCase
+import com.example.squadmovies.domain.usecase.MovieByTitleUseCase
 import com.example.squadmovies.projeto.adapter.MovieAdapter
-import com.example.squadmovies.projeto.model.MovieResponse
 import com.example.squadmovies.projeto.network.IRetrofitService
 import com.example.squadmovies.projeto.utils.Constants
-import com.example.squadmovies.projeto.viewModel.MovieViewModel
+import com.example.squadmovies.projeto.viewModel.MovieListViewModel
 
-class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
+class MovieListMainActivity : AppCompatActivity(), IClickItemMovieListener {
 
-    private val viewModel by lazy {
-        ViewModelProvider(
-            this,
-            MovieViewModel.MovieViewModelFactory(
-                MovieUseCase(MovieRepository(IRetrofitService.getBaseUrl()))
-            )
-
-        )
-            .get(MovieViewModel::class.java)
-    }
-
-    private val sharedPreference by lazy {
-        getSharedPreferences(
-            "Dados_persistidos",
-            Context.MODE_PRIVATE
-        )
-    }
     private lateinit var movieAdapter: MovieAdapter
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
+    }
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this,
+            MovieListViewModel.MovieViewModelFactory(
+                IAllMovieUseCase(MovieRepository(IRetrofitService.getBaseUrl())),
+                MovieByTitleUseCase(MovieByTitleRepository(IRetrofitService.getBaseUrl()))
+            )
+
+        )[MovieListViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
         setupMenu()
         setupButtonBack()
         initAdapter(arrayListOf())
@@ -58,7 +52,7 @@ class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
 
     private fun initAdapter(list: List<Movie>) {
         this.movieAdapter = MovieAdapter(this)
-        binding.recyclerviewMovies.layoutManager = LinearLayoutManager(this@MovieMainActivity)
+        binding.recyclerviewMovies.layoutManager = LinearLayoutManager(this@MovieListMainActivity)
         binding.recyclerviewMovies.setHasFixedSize(true)
         binding.recyclerviewMovies.adapter = movieAdapter
         with(movieAdapter) { submitList(list) }
@@ -74,13 +68,13 @@ class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
         viewModel.errorMessage.observe(this) { message ->
             Toast.makeText(this, message.toString(), Toast.LENGTH_SHORT).show()
         }
-        viewModel.listMovieLiveData.observe(this) { movies ->
-        }
     }
-
     private fun setupOnChangeListeners() {
         binding.editText.doOnTextChanged { text, start, before, count ->
-            // viewModel.getMovieByTitle(text.toString())
+
+            if (text?.length!! > 2) {
+                viewModel.getTitle(text.toString())
+            }
         }
     }
 
@@ -89,7 +83,7 @@ class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
         binding.toolbarMain.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.favorite -> {
-                    startActivity(Intent(this@MovieMainActivity, MovieFavoriteActivity::class.java))
+                    startActivity(Intent(this@MovieListMainActivity, MovieFavoriteActivity::class.java))
                     true
                 }
                 else -> {
@@ -109,18 +103,13 @@ class MovieMainActivity : AppCompatActivity(), IClickItemMovieListener {
         )
     }
 
-    private fun callScreenDetailsMovies(movie: MovieResponse) {
+    private fun callScreenDetailsMovies(movie: Movie) {
         val intent = Intent(this, MovieDetailsActivity::class.java)
         intent.putExtra(Constants.EXTRA_MOVIE_ID, movie.imdbID)
         startActivity(intent)
     }
 
     override fun onItemClikListener(movie: Movie) {
-        TODO("Not yet implemented")
+        callScreenDetailsMovies(movie)
     }
 }
-//    private fun salvarDados() {
-//        val sharedPreferencesEditor = sharedPreference.edit()
-//            sharedPreferencesEditor.putString(
-//            sharedPreferencesEditor.apply()
-//    }

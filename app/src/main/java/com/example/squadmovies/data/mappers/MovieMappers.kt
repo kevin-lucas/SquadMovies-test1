@@ -1,11 +1,11 @@
-package com.example.squadmovies.data.mappers
+package com.example.squadmovies.test.mappers
 
 import com.example.squadmovies.domain.entities.Movie
-import com.example.squadmovies.projeto.model.MovieResponse
+import com.example.squadmovies.data.model.MovieResponse
 
 object CoinsMappers {
     fun fromRemoteToDomain(movieList: List<MovieResponse>): List<Movie> {
-        return movieList.map { fromRemoteToDomain(it) }
+        return movieList.map { fromRemoteToDomain(it) } //fazemos a conversao do objeto movieList/Movie
     }
 
     fun fromRemoteToDomain(movie: MovieResponse): Movie =

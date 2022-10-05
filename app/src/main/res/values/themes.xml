@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.SquadMovies" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#003767</item>
+        <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">#003767</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->

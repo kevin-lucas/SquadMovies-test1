@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.squadmovies.databinding.ResItemUserBinding
 import com.example.squadmovies.domain.entities.Movie
-import com.example.squadmovies.projeto.model.MovieResponse
 
 class MovieAdapter(private val onClick: IClickItemMovieListener) :
     ListAdapter<Movie, MovieAdapter.MovieViewHolder>(
@@ -48,7 +47,7 @@ class MovieAdapter(private val onClick: IClickItemMovieListener) :
     }
 
     override fun onItemClikListener(movie: Movie) {
-        TODO("Not yet implemented")
+
     }
 }
 
