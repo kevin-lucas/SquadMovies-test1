@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="15dp"
     tools:context=".projeto.view.MovieDetailsActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -14,8 +13,19 @@
         android:background="@color/azul_ciano"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/menu_toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_details"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_movie_details"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/text_movie_details"
@@ -31,7 +41,7 @@
 
     <TextView
         android:id="@+id/text_movie_plot"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_marginTop="32dp"
@@ -46,21 +56,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        app:barrierMargin="10dp"
+        android:layout_marginStart="16dp"
         android:text="@string/movies_main"
         android:textColor="@color/black"
         android:textSize="20sp"
+        app:barrierMargin="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_movie_plot" />
 
-    <ImageView
-        android:id="@+id/img_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_movie_details"
-        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

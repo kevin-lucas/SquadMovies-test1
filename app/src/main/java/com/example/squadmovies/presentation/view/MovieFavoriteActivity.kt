@@ -7,13 +7,16 @@ import com.example.squadmovies.R
 import com.example.squadmovies.databinding.ActivityFavoriteBinding
 
 class MovieFavoriteActivity : AppCompatActivity() {
-    private val bindind by lazy { ActivityFavoriteBinding.inflate(layoutInflater)
+    private val bindind by lazy {
+        ActivityFavoriteBinding.inflate(layoutInflater)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(bindind.root)
         setupIconBack()
     }
+
     private fun setupIconBack() {
         bindind.toolbarFavorite.setNavigationIcon(R.drawable.ic_back)
         bindind.toolbarFavorite.setNavigationOnClickListener(

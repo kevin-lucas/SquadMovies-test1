@@ -12,7 +12,7 @@ import retrofit2.http.Query
 interface IRetrofitService {
     @GET("?apikey=a487beb6")
     suspend fun getAllMovies(
-        @Query("s") movies: String = "aaa"
+        @Query("s") movies: String = ""
     ): Response<SearchBaseMovieResponse>
 
     @GET("?apikey=a487beb6")

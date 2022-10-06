@@ -1,7 +1,7 @@
 package com.example.squadmovies.domain.interactor
 
-import com.example.squadmovies.domain.entities.Movie
+import com.example.squadmovies.domain.entities.MovieDomainEntities
 
 interface IAllMovieUseCase {
-    suspend fun getAllMoviesRepository(): List<Movie>?
+    suspend fun getAllMoviesRepository(): List<MovieDomainEntities>?
 }

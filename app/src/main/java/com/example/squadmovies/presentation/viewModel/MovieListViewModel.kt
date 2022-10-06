@@ -1,7 +1,7 @@
 package com.example.squadmovies.projeto.viewModel
 
 import androidx.lifecycle.*
-import com.example.squadmovies.domain.entities.Movie
+import com.example.squadmovies.domain.entities.MovieDomainEntities
 import com.example.squadmovies.domain.usecase.MovieByTitleUseCase
 import com.example.squadmovies.domain.usecase.IAllMovieUseCase
 import kotlinx.coroutines.launch
@@ -14,8 +14,8 @@ class MovieListViewModel(
 ) :
     ViewModel() {
 
-    private val _listMovieMutableLiveData = MutableLiveData<List<Movie>?>()
-    val listMovieLiveData: MutableLiveData<List<Movie>?> get() = _listMovieMutableLiveData
+    private val _listMovieMutableLiveData = MutableLiveData<List<MovieDomainEntities>?>()
+    val listMovieLiveData: MutableLiveData<List<MovieDomainEntities>?> get() = _listMovieMutableLiveData
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
