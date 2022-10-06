@@ -1,7 +1,7 @@
 package com.example.squadmovies.presentation.viewModel
 
 import androidx.lifecycle.*
-import com.example.squadmovies.domain.entities.Movie
+import com.example.squadmovies.data.dao.MovieEntity
 import com.example.squadmovies.domain.interactor.IMovieGetIdUseCase
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -11,8 +11,8 @@ class MovieDetailsViewModel(
         IMovieGetIdUseCase
 ) : ViewModel() {
 
-    private val _movieLiveData = MutableLiveData<Movie?>()
-    val movieLiveData: MutableLiveData<Movie?> get() = _movieLiveData
+    private val _movieLiveData = MutableLiveData<MovieEntity?>()
+    val movieLiveData: MutableLiveData<MovieEntity?> get() = _movieLiveData
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage

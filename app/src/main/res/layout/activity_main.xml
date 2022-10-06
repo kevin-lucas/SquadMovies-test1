@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    android:background="#395B78"
+    android:background="#112536"
     tools:context=".projeto.view.MovieListMainActivity" >
 
     <androidx.appcompat.widget.Toolbar

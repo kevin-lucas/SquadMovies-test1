@@ -13,10 +13,10 @@ import com.example.squadmovies.R
 import com.example.squadmovies.data.respository.AllMoviesRepository
 import com.example.squadmovies.data.respository.ByTitleMovieRepository
 import com.example.squadmovies.databinding.ActivityMainBinding
-import com.example.squadmovies.domain.entities.Movie
+import com.example.squadmovies.domain.entities.MovieDomainEntities
 import com.example.squadmovies.domain.usecase.IAllMovieUseCase
 import com.example.squadmovies.domain.usecase.MovieByTitleUseCase
-import com.example.squadmovies.projeto.adapter.MovieAdapter
+import com.example.squadmovies.presentation.adapter.MovieAdapter
 import com.example.squadmovies.projeto.network.IRetrofitService
 import com.example.squadmovies.projeto.utils.Constants
 import com.example.squadmovies.projeto.viewModel.MovieListViewModel
@@ -24,9 +24,11 @@ import com.example.squadmovies.projeto.viewModel.MovieListViewModel
 class MovieListMainActivity : AppCompatActivity(), IClickItemMovieListener {
 
     private lateinit var movieAdapter: MovieAdapter
+
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
+
     private val viewModel by lazy {
         ViewModelProvider(
             this,
@@ -41,16 +43,14 @@ class MovieListMainActivity : AppCompatActivity(), IClickItemMovieListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        setupMenu()
         setupButtonBack()
         callingReuestApi()
         setupObservers()
         setupOnChangeListeners()
     }
 
-    private fun initAdapter(list: List<Movie>) {
-        this.movieAdapter = MovieAdapter(this)
+    private fun initAdapter(list: List<MovieDomainEntities>) {
+        this.movieAdapter = MovieAdapter(this, this@MovieListMainActivity)
         binding.recyclerviewMovies.layoutManager = LinearLayoutManager(this@MovieListMainActivity)
         binding.recyclerviewMovies.setHasFixedSize(true)
         binding.recyclerviewMovies.adapter = movieAdapter
@@ -68,6 +68,7 @@ class MovieListMainActivity : AppCompatActivity(), IClickItemMovieListener {
             Toast.makeText(this, message.toString(), Toast.LENGTH_SHORT).show()
         }
     }
+
     private fun setupOnChangeListeners() {
         binding.editText.doOnTextChanged { text, start, before, count ->
 
@@ -76,23 +77,9 @@ class MovieListMainActivity : AppCompatActivity(), IClickItemMovieListener {
             }
         }
     }
+
     private fun callingReuestApi() {
         viewModel.getMovies()
-    }
-
-    private fun setupMenu() {
-        binding.toolbarMain.inflateMenu(R.menu.menu_toolbar)
-        binding.toolbarMain.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.favorite -> {
-                    startActivity(Intent(this@MovieListMainActivity, MovieFavoriteActivity::class.java))
-                    true
-                }
-                else -> {
-                    false
-                }
-            }
-        }
     }
 
     private fun setupButtonBack() {
@@ -105,13 +92,13 @@ class MovieListMainActivity : AppCompatActivity(), IClickItemMovieListener {
         )
     }
 
-    private fun callScreenDetailsMovies(movie: Movie) {
+    private fun callScreenDetailsMovies(movie: MovieDomainEntities) {
         val intent = Intent(this, MovieDetailsActivity::class.java)
         intent.putExtra(Constants.EXTRA_MOVIE_ID, movie.imdbID)
         startActivity(intent)
     }
 
-    override fun onItemClikListener(movie: Movie) {
+    override fun onItemClikListener(movie: MovieDomainEntities) {
         callScreenDetailsMovies(movie)
     }
 }

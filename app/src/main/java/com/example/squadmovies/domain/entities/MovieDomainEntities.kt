@@ -2,7 +2,7 @@ package com.example.squadmovies.domain.entities
 
 import com.google.gson.annotations.SerializedName
 
-data class Movie(
+data class MovieDomainEntities(
 
     @SerializedName("Title")
     val title: String,

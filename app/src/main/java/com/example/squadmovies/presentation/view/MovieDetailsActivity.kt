@@ -1,14 +1,15 @@
 package com.example.squadmovies.projeto.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.squadmovies.R
+import com.example.squadmovies.data.dao.MovieEntity
 import com.example.squadmovies.data.respository.GetIdMovieRepository
 import com.example.squadmovies.databinding.ActivityMovieDetailsBinding
-import com.example.squadmovies.domain.entities.Movie
 import com.example.squadmovies.domain.usecase.IMovieGetIdUsecase
 import com.example.squadmovies.presentation.viewModel.MovieDetailsViewModel
 import com.example.squadmovies.projeto.network.IRetrofitService
@@ -32,6 +33,7 @@ class MovieDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setupMenu()
         setupIconBack()
         loadMovieDetails()
         setupObservers()
@@ -51,7 +53,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun setMovieDetails(movie: Movie?) {
+    private fun setMovieDetails(movie: MovieEntity?) {
         Glide.with(binding.root.context)
             .load(movie!!.poster)
             .into(binding.imgDetails)
@@ -67,5 +69,19 @@ class MovieDetailsActivity : AppCompatActivity() {
                 true
             }
         )
+    }
+    private fun setupMenu() {
+        binding.toolbarMovieDetails.inflateMenu(R.menu.menu_toolbar)
+        binding.toolbarMovieDetails.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.favorite -> {
+                    startActivity(Intent(this@MovieDetailsActivity, MovieFavoriteActivity::class.java))
+                    true
+                }
+                else -> {
+                    false
+                }
+            }
+        }
     }
 }

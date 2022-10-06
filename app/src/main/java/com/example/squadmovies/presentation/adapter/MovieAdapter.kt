@@ -1,6 +1,7 @@
-package com.example.squadmovies.projeto.adapter
+package com.example.squadmovies.presentation.adapter
 
 import IClickItemMovieListener
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,12 +9,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.squadmovies.databinding.ResItemUserBinding
-import com.example.squadmovies.domain.entities.Movie
+import com.example.squadmovies.domain.entities.MovieDomainEntities
 
-class MovieAdapter(private val onClick: IClickItemMovieListener) :
-    ListAdapter<Movie, MovieAdapter.MovieViewHolder>(
+class MovieAdapter(private val onClick: IClickItemMovieListener, private val context: Context) :
+    ListAdapter<MovieDomainEntities, MovieAdapter.MovieViewHolder>(
         MovieResponseCallback()
-    ),IClickItemMovieListener{
+    ) {
 
     //  val onItemClick :((MovieDetailsResponse)->Unit)? = null
 
@@ -41,22 +42,28 @@ class MovieAdapter(private val onClick: IClickItemMovieListener) :
             holder.binding.txtTituloMovie.text = itemMovie.title
             holder.binding.txtMovieYear.text = itemMovie.year
         }
-          holder.itemView.setOnClickListener {
-              onClick.onItemClikListener(itemMovie)
-          }
+        holder.itemView.setOnClickListener {
+            onClick.onItemClikListener(itemMovie)
+        }
     }
 
-    override fun onItemClikListener(movie: Movie) {
+    class MovieResponseCallback : DiffUtil.ItemCallback<MovieDomainEntities>() {
+        override fun areItemsTheSame(
+            oldItem: MovieDomainEntities,
+            newItem: MovieDomainEntities
+        ): Boolean {
+            return oldItem.year == newItem.year
+        }
 
+        override fun areContentsTheSame(
+            oldItem: MovieDomainEntities,
+            newItem: MovieDomainEntities
+        ): Boolean {
+            return oldItem.title == newItem.title
+        }
     }
 }
 
-class MovieResponseCallback : DiffUtil.ItemCallback<Movie>() {
-    override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-        return oldItem.title == newItem.language
-    }
 
-    override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-        return oldItem.title == newItem.year
-    }
-}
+
+
